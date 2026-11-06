@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Redwan ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #020204;
+    color: white;
+    font-family: Georgia, serif;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+header {
+    position: absolute;
+    top: 25px;
+    width: 100%;
+    text-align: center;
+    z-index: 5;
+    padding: 0 12px;
+}
+
+h1 {
+    color: #ff8bb8;
+    font-size: clamp(23px, 5vw, 40px);
+    text-shadow: 0 0 20px #ff2679;
+    margin-bottom: 8px;
+}
+
+header p {
+    color: #c5a4b5;
+    font-size: 13px;
+    letter-spacing: 3px;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100vh;
+}
+
+footer {
+    position: absolute;
+    bottom: 22px;
+    width: 100%;
+    text-align: center;
+    color: #d9a6bd;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+footer span {
+    color: #ff4f91;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>For You, Redwan ❤️</h1>
+    <p>75 LANGUAGES. ONE MESSAGE.</p>
+</header>
+
+<canvas id="heart"></canvas>
+
+<footer>
+    75 ways to say <span>I LOVE YOU</span>
+</footer>
+
+<script>
+
+const words = [
+["English","I love you"],
+["Bangla","আমি তোমাকে ভালোবাসি"],
+["Arabic","أحبك"],
+["Spanish","Te amo"],
+["French","Je t'aime"],
+["German","Ich liebe dich"],
+["Italian","Ti amo"],
+["Portuguese","Eu te amo"],
+["Dutch","Ik hou van jou"],
+["Swedish","Jag älskar dig"],
+["Norwegian","Jeg elsker deg"],
+["Danish","Jeg elsker dig"],
+["Finnish","Rakastan sinua"],
+["Icelandic","Ég elska þig"],
+["Irish","Tá grá agam duit"],
+["Welsh","Rwy'n dy garu di"],
+["Greek","Σ' αγαπώ"],
+["Turkish","Seni seviyorum"],
+["Russian","Я тебя люблю"],
+["Ukrainian","Я тебе кохаю"],
+["Polish","Kocham cię"],
+["Czech","Miluji tě"],
+["Slovak","Ľúbim ťa"],
+["Hungarian","Szeretlek"],
+["Romanian","Te iubesc"],
+["Bulgarian","Обичам те"],
+["Serbian","Волим те"],
+["Croatian","Volim te"],
+["Albanian","Të dua"],
+["Armenian","Ես քեզ սիրում եմ"],
+["Georgian","მიყვარხარ"],
+["Hebrew","אני אוהב/ת אותך"],
+["Persian","دوستت دارم"],
+["Urdu","مجھے تم سے محبت ہے"],
+["Hindi","मैं तुमसे प्यार करता/करती हूँ"],
+["Nepali","म तिमीलाई माया गर्छु"],
+["Punjabi","ਮੈਂ ਤੈਨੂੰ ਪਿਆਰ ਕਰਦਾ/ਕਰਦੀ ਹਾਂ"],
+["Gujarati","હું તને પ્રેમ કરું છું"],
+["Marathi","मी तुझ्यावर प्रेम करतो/करते"],
+["Tamil","நான் உன்னை காதலிக்கிறேன்"],
+["Telugu","నేను నిన్ను ప్రేమిస్తున్నాను"],
+["Kannada","ನಾನು ನಿನ್ನನ್ನು ಪ್ರೀತಿಸುತ್ತೇನೆ"],
+["Malayalam","ഞാൻ നിന്നെ സ്നേഹിക്കുന്നു"],
+["Sinhala","මම ඔයාට ආදරෙයි"],
+["Chinese","我爱你"],
+["Traditional Chinese","我愛你"],
+["Japanese","愛してる"],
+["Korean","사랑해"],
+["Vietnamese","Anh yêu em"],
+["Thai","ฉันรักคุณ"],
+["Lao","ຂ້ອຍຮັກເຈົ້າ"],
+["Khmer","ខ្ញុំស្រឡាញ់អ្នក"],
+["Burmese","မင်းကိုချစ်တယ်"],
+["Indonesian","Aku cinta kamu"],
+["Malay","Saya sayang awak"],
+["Filipino","Mahal kita"],
+["Mongolian","Би чамд хайртай"],
+["Kazakh","Мен сені жақсы көремін"],
+["Uzbek","Men seni sevaman"],
+["Azerbaijani","Mən səni sevirəm"],
+["Swahili","Nakupenda"],
+["Amharic","እወድሃለሁ"],
+["Yoruba","Mo nífẹ̀ẹ́ rẹ"],
+["Igbo","A hụrụ m gị n’anya"],
+["Zulu","Ngiyakuthanda"],
+["Xhosa","Ndiyakuthanda"],
+["Afrikaans","Ek is lief vir jou"],
+["Haitian Creole","Mwen renmen ou"],
+["Latin","Te amo"],
+["Esperanto","Mi amas vin"],
+["Catalan","T'estimo"],
+["Basque","Maite zaitut"],
+["Lithuanian","Aš tave myliu"],
+["Latvian","Es tevi mīlu"],
+["Estonian","Ma armastan sind"],
+["Maltese","Inħobbok"]
+];
+
+const canvas = document.getElementById("heart");
+const ctx = canvas.getContext("2d");
+
+let W, H, particles = [];
+let startTime = 0;
+
+function heartPoint(t, scale) {
+    return {
+        x: W/2 + 16 * Math.pow(Math.sin(t),3) * scale,
+        y: H/2 - (
+            13*Math.cos(t)
+            -5*Math.cos(2*t)
+            -2*Math.cos(3*t)
+            -Math.cos(4*t)
+        ) * scale
+    };
+}
+
+function insideHeart(x,y,outline) {
+    let inside = false;
+
+    for(let i=0,j=outline.length-1;i<outline.length;j=i++) {
+        let a=outline[i], b=outline[j];
+
+        if(((a.y>y)!==(b.y>y)) &&
+           x<(b.x-a.x)*(y-a.y)/(b.y-a.y)+a.x) {
+            inside=!inside;
+        }
+    }
+
+    return inside;
+}
+
+function createParticles() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+
+    ctx.setTransform(1,0,0,1,0,0);
+
+    particles = [];
+
+    const scale = Math.min(W/37,H/36);
+
+    const outline = [];
+
+    for(let i=0;i<360;i++) {
+        outline.push(heartPoint(i*Math.PI*2/360,scale));
+    }
+
+    const spacing = W < 600 ? 23 : 32;
+
+    for(let y=H*0.22;y<H*0.82;y+=spacing) {
+        for(let x=W*0.08;x<W*0.92;x+=spacing) {
+
+            if(insideHeart(x,y,outline)) {
+
+                const index = particles.length;
+
+                const phrase = words[index % words.length];
+
+                particles.push({
+                    text: phrase[1],
+                    language: phrase[0],
+                    targetX: x,
+                    targetY: y,
+                    x: Math.random()*W,
+                    y: Math.random()*H,
+                    delay: Math.random()*1800,
+                    size: W < 600 ? 10 : 13,
+                    rotation: (Math.random()-.5)*0.4,
+                    seed: Math.random()*10
+                });
+            }
+        }
+    }
+
+    startTime = performance.now();
+}
+
+function animate(now) {
+
+    ctx.clearRect(0,0,W,H);
+
+    const elapsed = now-startTime;
+
+    const formation = Math.min(1,Math.max(0,(elapsed-300)/5000));
+
+    particles.forEach((p,i)=>{
+
+        const local = Math.max(
+            0,
+            Math.min(1,(elapsed-p.delay)/5000)
+        );
+
+        const ease = local*local*(3-2*local);
+
+        const drift = (1-ease)*0.25;
+
+        const swirl = Math.sin(elapsed/450+p.seed)*12*drift;
+
+        const x = p.x+(p.targetX-p.x)*ease+swirl;
+        const y = p.y+(p.targetY-p.y)*ease-swirl;
+
+        const pulse = formation===1 ?
+            1+Math.sin(elapsed/650)*0.07 : 1;
+
+        ctx.save();
+
+        ctx.translate(
+            W/2+(x-W/2)*pulse,
+            H/2+(y-H/2)*pulse
+        );
+
+        ctx.rotate(p.rotation*(1-ease));
+
+        ctx.globalAlpha = 0.2+ease*0.8;
+
+        ctx.font = `600 ${p.size}px Arial, sans-serif`;
+
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        ctx.shadowColor = "#ff3984";
+        ctx.shadowBlur = 12;
+
+        const colors = [
+            "#ff8ab7",
+            "#ffb0cc",
+            "#ff5e98",
+            "#ffd1e1",
+            "#f77ca8"
+        ];
+
+        ctx.fillStyle = colors[i%colors.length];
+
+        ctx.fillText(p.text,0,0);
+
+        ctx.restore();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+window.addEventListener("resize",createParticles);
+
+document.fonts.ready.then(()=>{
+    createParticles();
+    requestAnimationFrame(animate);
+});
+
+</script>
+
+</body>
+</html>
