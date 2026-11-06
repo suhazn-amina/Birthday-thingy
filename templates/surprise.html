@@ -3,312 +3,240 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Redwan ❤️</title>
+<title>For Redwan ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&family=Noto+Naskh+Arabic&family=Noto+Sans+JP&family=Noto+Sans+SC&family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <style>
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    background: #020204;
+    background: #050505;
+    overflow: hidden;
     color: white;
     font-family: Georgia, serif;
-    overflow: hidden;
-    min-height: 100vh;
-}
-
-header {
-    position: absolute;
-    top: 25px;
-    width: 100%;
-    text-align: center;
-    z-index: 5;
-    padding: 0 12px;
 }
 
 h1 {
-    color: #ff8bb8;
-    font-size: clamp(23px, 5vw, 40px);
-    text-shadow: 0 0 20px #ff2679;
-    margin-bottom: 8px;
+    position: absolute;
+    top: 5%;
+    width: 100%;
+    text-align: center;
+    color: #f5dce7;
+    font-size: clamp(20px, 4vw, 32px);
+    font-weight: normal;
+    letter-spacing: 2px;
+    padding: 0 10px;
 }
 
-header p {
-    color: #c5a4b5;
-    font-size: 13px;
-    letter-spacing: 3px;
+p {
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
+    text-align: center;
+    color: #c7aab8;
+    letter-spacing: 2px;
+    font-size: 12px;
 }
 
 canvas {
-    display: block;
-    width: 100%;
-    height: 100vh;
-}
-
-footer {
     position: absolute;
-    bottom: 22px;
+    inset: 0;
     width: 100%;
-    text-align: center;
-    color: #d9a6bd;
-    font-size: 14px;
-    letter-spacing: 2px;
+    height: 100%;
 }
-
-footer span {
-    color: #ff4f91;
-}
-
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>For You, Redwan ❤️</h1>
-    <p>75 LANGUAGES. ONE MESSAGE.</p>
-</header>
-
+<h1>For you, in every language ♡</h1>
 <canvas id="heart"></canvas>
-
-<footer>
-    75 ways to say <span>I LOVE YOU</span>
-</footer>
+<p>15 languages. One feeling. ♡</p>
 
 <script>
-
-const words = [
-["English","I love you"],
-["Bangla","আমি তোমাকে ভালোবাসি"],
-["Arabic","أحبك"],
-["Spanish","Te amo"],
-["French","Je t'aime"],
-["German","Ich liebe dich"],
-["Italian","Ti amo"],
-["Portuguese","Eu te amo"],
-["Dutch","Ik hou van jou"],
-["Swedish","Jag älskar dig"],
-["Norwegian","Jeg elsker deg"],
-["Danish","Jeg elsker dig"],
-["Finnish","Rakastan sinua"],
-["Icelandic","Ég elska þig"],
-["Irish","Tá grá agam duit"],
-["Welsh","Rwy'n dy garu di"],
-["Greek","Σ' αγαπώ"],
-["Turkish","Seni seviyorum"],
-["Russian","Я тебя люблю"],
-["Ukrainian","Я тебе кохаю"],
-["Polish","Kocham cię"],
-["Czech","Miluji tě"],
-["Slovak","Ľúbim ťa"],
-["Hungarian","Szeretlek"],
-["Romanian","Te iubesc"],
-["Bulgarian","Обичам те"],
-["Serbian","Волим те"],
-["Croatian","Volim te"],
-["Albanian","Të dua"],
-["Armenian","Ես քեզ սիրում եմ"],
-["Georgian","მიყვარხარ"],
-["Hebrew","אני אוהב/ת אותך"],
-["Persian","دوستت دارم"],
-["Urdu","مجھے تم سے محبت ہے"],
-["Hindi","मैं तुमसे प्यार करता/करती हूँ"],
-["Nepali","म तिमीलाई माया गर्छु"],
-["Punjabi","ਮੈਂ ਤੈਨੂੰ ਪਿਆਰ ਕਰਦਾ/ਕਰਦੀ ਹਾਂ"],
-["Gujarati","હું તને પ્રેમ કરું છું"],
-["Marathi","मी तुझ्यावर प्रेम करतो/करते"],
-["Tamil","நான் உன்னை காதலிக்கிறேன்"],
-["Telugu","నేను నిన్ను ప్రేమిస్తున్నాను"],
-["Kannada","ನಾನು ನಿನ್ನನ್ನು ಪ್ರೀತಿಸುತ್ತೇನೆ"],
-["Malayalam","ഞാൻ നിന്നെ സ്നേഹിക്കുന്നു"],
-["Sinhala","මම ඔයාට ආදරෙයි"],
-["Chinese","我爱你"],
-["Traditional Chinese","我愛你"],
-["Japanese","愛してる"],
-["Korean","사랑해"],
-["Vietnamese","Anh yêu em"],
-["Thai","ฉันรักคุณ"],
-["Lao","ຂ້ອຍຮັກເຈົ້າ"],
-["Khmer","ខ្ញុំស្រឡាញ់អ្នក"],
-["Burmese","မင်းကိုချစ်တယ်"],
-["Indonesian","Aku cinta kamu"],
-["Malay","Saya sayang awak"],
-["Filipino","Mahal kita"],
-["Mongolian","Би чамд хайртай"],
-["Kazakh","Мен сені жақсы көремін"],
-["Uzbek","Men seni sevaman"],
-["Azerbaijani","Mən səni sevirəm"],
-["Swahili","Nakupenda"],
-["Amharic","እወድሃለሁ"],
-["Yoruba","Mo nífẹ̀ẹ́ rẹ"],
-["Igbo","A hụrụ m gị n’anya"],
-["Zulu","Ngiyakuthanda"],
-["Xhosa","Ndiyakuthanda"],
-["Afrikaans","Ek is lief vir jou"],
-["Haitian Creole","Mwen renmen ou"],
-["Latin","Te amo"],
-["Esperanto","Mi amas vin"],
-["Catalan","T'estimo"],
-["Basque","Maite zaitut"],
-["Lithuanian","Aš tave myliu"],
-["Latvian","Es tevi mīlu"],
-["Estonian","Ma armastan sind"],
-["Maltese","Inħobbok"]
-];
-
 const canvas = document.getElementById("heart");
 const ctx = canvas.getContext("2d");
 
-let W, H, particles = [];
-let startTime = 0;
+const words = [
+    "I love you",
+    "আমি তোমাকে ভালোবাসি",
+    "أحبك",
+    "Te amo",
+    "Je t'aime",
+    "Ich liebe dich",
+    "Ti amo",
+    "Seni seviyorum",
+    "میں تم سے محبت کرتا ہوں",
+    "愛してる",
+    "사랑해",
+    "我爱你",
+    "Я тебя люблю",
+    "Σ' αγαπώ",
+    "Aku cinta kamu"
+];
 
-function heartPoint(t, scale) {
+const font = '"Noto Sans Bengali", "Noto Naskh Arabic", "Noto Sans JP", "Noto Sans SC", "Noto Sans KR", Arial, sans-serif';
+
+let particles = [];
+let W, H, scale;
+
+function heartPoint(t) {
     return {
-        x: W/2 + 16 * Math.pow(Math.sin(t),3) * scale,
-        y: H/2 - (
-            13*Math.cos(t)
-            -5*Math.cos(2*t)
-            -2*Math.cos(3*t)
-            -Math.cos(4*t)
-        ) * scale
+        x: 16 * Math.pow(Math.sin(t), 3),
+        y: 13 * Math.cos(t)
+           - 5 * Math.cos(2*t)
+           - 2 * Math.cos(3*t)
+           - Math.cos(4*t)
     };
 }
 
-function insideHeart(x,y,outline) {
-    let inside = false;
+function resize() {
+    scale = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
 
-    for(let i=0,j=outline.length-1;i<outline.length;j=i++) {
-        let a=outline[i], b=outline[j];
+    canvas.width = W * scale;
+    canvas.height = H * scale;
 
-        if(((a.y>y)!==(b.y>y)) &&
-           x<(b.x-a.x)*(y-a.y)/(b.y-a.y)+a.x) {
-            inside=!inside;
-        }
-    }
-
-    return inside;
+    ctx.setTransform(scale, 0, 0, scale, 0, 0);
+    createHeart();
 }
 
-function createParticles() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-
-    ctx.setTransform(1,0,0,1,0,0);
-
+function createHeart() {
     particles = [];
 
-    const scale = Math.min(W/37,H/36);
+    const mobile = W < 500;
+    const heartW = Math.min(W * 0.90, 590);
+    const heartH = Math.min(H * 0.59, 440);
 
-    const outline = [];
+    const centerX = W / 2;
+    const centerY = H / 2 + 5;
 
-    for(let i=0;i<360;i++) {
-        outline.push(heartPoint(i*Math.PI*2/360,scale));
-    }
+    const fontSize = mobile ? 11 : 14;
+    const rowGap = mobile ? 23 : 29;
+    const wordGap = mobile ? 10 : 15;
 
-    const spacing = W < 600 ? 23 : 32;
+    ctx.font = `${fontSize}px ${font}`;
 
-    for(let y=H*0.22;y<H*0.82;y+=spacing) {
-        for(let x=W*0.08;x<W*0.92;x+=spacing) {
+    const rows = Math.floor(heartH / rowGap);
+    let wordIndex = 0;
 
-            if(insideHeart(x,y,outline)) {
+    for (let r = 0; r <= rows; r++) {
+        const normalizedY = -1 + (2 * r / rows);
 
-                const index = particles.length;
+        let minX = Infinity;
+        let maxX = -Infinity;
 
-                const phrase = words[index % words.length];
+        // Find the actual left and right edges
+        // of the heart at this height.
+        for (let i = 0; i <= 1200; i++) {
+            const t = (i / 1200) * Math.PI * 2;
+            const point = heartPoint(t);
 
-                particles.push({
-                    text: phrase[1],
-                    language: phrase[0],
-                    targetX: x,
-                    targetY: y,
-                    x: Math.random()*W,
-                    y: Math.random()*H,
-                    delay: Math.random()*1800,
-                    size: W < 600 ? 10 : 13,
-                    rotation: (Math.random()-.5)*0.4,
-                    seed: Math.random()*10
-                });
+            const y = point.y / 17;
+            const x = point.x / 17;
+
+            if (Math.abs(y - normalizedY) < 0.012) {
+                minX = Math.min(minX, x);
+                maxX = Math.max(maxX, x);
             }
         }
-    }
 
-    startTime = performance.now();
+        if (!Number.isFinite(minX) || maxX - minX < 0.12) {
+            continue;
+        }
+
+        const left = centerX + minX * heartW;
+        const right = centerX + maxX * heartW;
+        const available = right - left;
+
+        const rowWords = [];
+        let used = 0;
+
+        // Pack complete phrases without overlapping.
+        while (true) {
+            const phrase = words[wordIndex % words.length];
+            const phraseWidth = ctx.measureText(phrase).width;
+            const extra = phraseWidth +
+                (rowWords.length ? wordGap : 0);
+
+            if (used + extra > available) break;
+
+            rowWords.push({
+                text: phrase,
+                width: phraseWidth
+            });
+
+            used += extra;
+            wordIndex++;
+        }
+
+        if (!rowWords.length) continue;
+
+        let x = centerX - used / 2;
+
+        rowWords.forEach(word => {
+            const targetX = x + word.width / 2;
+            const targetY = centerY - normalizedY * heartH;
+
+            particles.push({
+                text: word.text,
+                x: targetX,
+                y: targetY,
+                startX: Math.random() * W,
+                startY: Math.random() * H,
+                delay: Math.random() * 1500
+            });
+
+            x += word.width + wordGap;
+        });
+    }
 }
 
-function animate(now) {
+function ease(t) {
+    return 1 - Math.pow(1 - t, 3);
+}
 
-    ctx.clearRect(0,0,W,H);
+function animate(time) {
+    ctx.clearRect(0, 0, W, H);
 
-    const elapsed = now-startTime;
+    const mobile = W < 500;
+    const fontSize = mobile ? 11 : 14;
 
-    const formation = Math.min(1,Math.max(0,(elapsed-300)/5000));
+    ctx.font = `${fontSize}px ${font}`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
 
-    particles.forEach((p,i)=>{
-
-        const local = Math.max(
+    particles.forEach(p => {
+        const progress = Math.max(
             0,
-            Math.min(1,(elapsed-p.delay)/5000)
+            Math.min(1, (time - p.delay) / 2500)
         );
 
-        const ease = local*local*(3-2*local);
+        const eased = ease(progress);
 
-        const drift = (1-ease)*0.25;
+        const x = p.startX + (p.x - p.startX) * eased;
+        const y = p.startY + (p.y - p.startY) * eased;
 
-        const swirl = Math.sin(elapsed/450+p.seed)*12*drift;
+        ctx.fillStyle =
+            `rgba(255, 225, 238, ${0.3 + eased * 0.7})`;
 
-        const x = p.x+(p.targetX-p.x)*ease+swirl;
-        const y = p.y+(p.targetY-p.y)*ease-swirl;
-
-        const pulse = formation===1 ?
-            1+Math.sin(elapsed/650)*0.07 : 1;
-
-        ctx.save();
-
-        ctx.translate(
-            W/2+(x-W/2)*pulse,
-            H/2+(y-H/2)*pulse
-        );
-
-        ctx.rotate(p.rotation*(1-ease));
-
-        ctx.globalAlpha = 0.2+ease*0.8;
-
-        ctx.font = `600 ${p.size}px Arial, sans-serif`;
-
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-
-        ctx.shadowColor = "#ff3984";
-        ctx.shadowBlur = 12;
-
-        const colors = [
-            "#ff8ab7",
-            "#ffb0cc",
-            "#ff5e98",
-            "#ffd1e1",
-            "#f77ca8"
-        ];
-
-        ctx.fillStyle = colors[i%colors.length];
-
-        ctx.fillText(p.text,0,0);
-
-        ctx.restore();
+        ctx.fillText(p.text, x, y);
     });
 
     requestAnimationFrame(animate);
 }
 
-window.addEventListener("resize",createParticles);
+window.addEventListener("resize", resize);
 
-document.fonts.ready.then(()=>{
-    createParticles();
-    requestAnimationFrame(animate);
-});
+resize();
+requestAnimationFrame(animate);
 
 </script>
-
 </body>
 </html>
