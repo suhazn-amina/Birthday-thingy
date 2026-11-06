@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Redwan!</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #321426, #09070d);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+.modal {
+  text-align: center;
+  padding: 40px 25px;
+  width: min(90%, 450px);
+  background: #211522;
+  border: 1px solid #a84b76;
+  border-radius: 25px;
+  box-shadow: 0 0 50px #e83c7760;
+}
+h1 { color: #ff8bb5; font-size: 2.5rem; }
+p { color: #e5cbd7; line-height: 1.7; }
+button {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 30px;
+  background: #ed568c;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover { background: #ff79a9; }
+.hidden { display: none; }
+.heart { font-size: 45px; }
+</style>
+</head>
+<body>
+
+<div class="modal" id="first">
+  <div class="heart">💗</div>
+  <h1>Happy Birthday, Redwan!</h1>
+  <p>Today deserves a little extra magic.</p>
+  <button onclick="next()">Continue ♡</button>
+</div>
+
+<div class="modal hidden" id="second">
+  <div class="heart">💌</div>
+  <h1>One more thing...</h1>
+  <p>Click on this button to get to the surprise.</p>
+  <button onclick="location.href='/surprise'">
+    Open your surprise ♥
+  </button>
+</div>
+
+<script>
+function next() {
+  document.getElementById("first").classList.add("hidden");
+  document.getElementById("second").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
